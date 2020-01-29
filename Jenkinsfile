@@ -68,7 +68,7 @@ pipeline {
     }
     stage('Send Slack Notification') {
       steps {
-         slackSend color: 'warning', message: "Mr. Belt: Please approve ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.JOB_URL} | Open>)"
+         slackSend color: 'YELLOW', message: "Mr. Belt: Please approve ${env.JOB_NAME} ${env.BUILD_NUMBER} (<${env.JOB_URL} | Open>)"
       }
     }
     stage('Request Input') {
@@ -77,4 +77,12 @@ pipeline {
       }
     }
   }
+  post {
+     success {
+       slackSend color: 'GREEN', message: "Build $JOB_NAME $BUILD_NUMBER Successful!"
+     }
+     failure {
+       slackSend color: 'RED', message: "Build $JOB_NAME $BUILD_NUMBER Failed!"
+     }
+    }
 }
