@@ -1,0 +1,53 @@
+//Courtesy of Digital Ocean
+//Borrowed from https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-on-ubuntu-18-04
+
+pipeline {
+    agent { label "agentfarm" }
+    stages {
+        stage('Update the current packages') {
+            steps {
+                sh 'sudo apt update'
+            }
+        }
+        stage('Install prerequisite packages') {
+            steps {
+                sh 'sudo apt install -y apt-transport-https ca-certificates curl software-properties-common'
+            }
+        }
+        stage('Add the GPG key to verify the Docker download') {
+            steps {
+                sh 'curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -'
+            }
+        }
+        stage('Add the Docker repository to your local machine') {
+            steps {
+                sh 'sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"'
+            }
+        }
+        stage('Update the packages again from the newly added repo') {
+            steps {
+                sh 'sudo apt update'
+            }
+        }
+        stage('Point to the local Docker repo that you just created') {
+            steps {
+                sh 'apt-cache policy docker-ce'
+            }
+        }
+        stage('Finally, install Docker') {
+            steps {
+                sh 'sudo apt install -y docker-ce'
+            }
+        }
+        stage('Check that Docker is running on your remote workstation') {
+            steps {
+                sh 'sudo systemctl status docker'
+            }
+        }
+        stage('Add your user to the Docker group') {
+            steps {
+                sh 'sudo usermod -aG docker ${USER}'
+            }
+        }
+    }
+}
