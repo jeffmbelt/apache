@@ -22,11 +22,17 @@ pipeline {
         }
       }
     }
-    stage('Install Test Kitchen') {
+    stage('Install Test Kitchen Gem') {
       steps {
+       script {
+          def exists = fileExists '/opt/chef-workstation/embedded/lib/ruby/gems/2.6.0/gems/test-kitchen-2.3.3/bin/kitchen'
+          if (exists) {
+            echo "Skipping Kitchen Gem Install"
+          } else {
             echo "Installing Test Kitchen"
             sh 'sudo chef gem install kitchen-docker'
             sh 'sudo chef env --chef-license accept'
+          }
       }
     }
     stage('Download Apache Cookbook') {
