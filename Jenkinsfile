@@ -29,16 +29,9 @@ pipeline {
     }
     stage('Install Test Kitchen') {
       steps {
-        script {
-          def exists = fileExists '/usr/bin/kitchen'
-          if (exists) {
-            echo "Skipping Test Kitchen Install"
-          } else {
             echo "Installing Test Kitchen"
             sh 'sudo chef gem install kitchen-docker'
             sh 'sudo chef env --chef-license accept'
-          }
-        }
       }
     }
   }
