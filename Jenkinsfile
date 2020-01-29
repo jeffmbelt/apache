@@ -32,7 +32,8 @@ pipeline {
            echo "Installing Test Kitchen"
            sh 'sudo chef gem install kitchen-docker'
            sh 'sudo chef env --chef-license accept'
-        } 
+          } 
+        }
       }
     }
     stage('Download Apache Cookbook') {
