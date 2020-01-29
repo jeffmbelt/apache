@@ -11,7 +11,7 @@ pipeline {
         script {
           def exists = fileExists '/usr/bin/chef-client'
           if (exists) {
-            echo "Skipping Chef Workstation Install'
+            echo "Skipping Chef Workstation Install"
           } else {
             echo "Installing Chef Workstation"
             sh 'sudo apt-get install -y wget tree unzip'
