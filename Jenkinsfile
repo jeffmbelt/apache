@@ -41,6 +41,11 @@ pipeline {
         git credentialsId: 'git-repo-id', url: 'git@github.com:jeffmbelt/apache.git'
       }
     }
+    stage('Lint using Cookstyle') {
+      steps {
+        sh 'cd $WORKSPACE && /opt/chef-workstation/bin/chef exec cookstyle . --except Layout/EndOfLine'
+      }
+    }
     stage('Run Kitchen Destroy') {
       steps {
             sh 'sudo kitchen destroy'
