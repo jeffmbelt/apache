@@ -13,7 +13,7 @@ end
 
 describe file('/var/www/html/index.html') do
   it { should exist }
-  its('content') { should match /DevOps End To End!/ }
+  its('content') { should match /Hello Pipeline World!/ }
 end
 
 describe upstart_service('apache2') do

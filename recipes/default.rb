@@ -10,7 +10,14 @@ end
 
 file '/var/www/html/index.html' do
   action :create
-  content 'DevOps End To End!'
+  content "<html>
+<body>
+<h1>Hello Pipeline World!</h1>
+<h2>This machine is running #{node['os']}</h2>
+<h2>My ip address is #{node['cloud']['public_ipv4']}</h2>
+<h2>This computer belongs to #{node['apache']['company_name']}</h2>
+</body>
+</html>"
 end
 
 service 'apache2' do
