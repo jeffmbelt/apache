@@ -75,7 +75,7 @@ pipeline {
          input 'Please approve or deny this build'
       }
     }
-    stage('Upload to Chef Infra Server, Converge Nodes') {
+    stage('Upload and Converge Nodes') {
       steps {
         withCredentials([zip(credentialsId: 'chef-starter-zip', variable: 'CHEFREPO')]) {
           sh "rm $WORKSPACE/Policyfile.lock.json"
