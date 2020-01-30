@@ -4,7 +4,7 @@
 # found at https://www.inspec.io/docs/reference/resources/
 
 describe port(80) do
-  it {should be_listening}
+  it { should be_listening }
 end
 
 describe package('apache2') do
@@ -12,8 +12,8 @@ describe package('apache2') do
 end
 
 describe file('/var/www/html/index.html') do
-  it {should exist}
-  its('content') { should match (/DevOps End To End!/) }
+  it { should exist }
+  its('content') { should match /DevOps End To End!/ }
 end
 
 describe upstart_service('apache2') do
