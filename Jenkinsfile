@@ -79,6 +79,7 @@ pipeline {
     stage('Upload to Chef Infra Server, Converge Nodes') {
       steps {
         withCredentials([zip(credentialsId: 'chef-starter-zip', variable: 'CHEFREPO')]) {
+          sh "rm $WORKSPACE/Policyfile.lock.json"
           sh "chef install $WORKSPACE/Policyfile.rb -c $CHEFREPO/chef-repo/.chef/knife.rb"
           sh "chef push prod $WORKSPACE/Policyfile.lock.json -c $CHEFREPO/chef-repo/.chef/knife.rb"
           withCredentials([sshUserPrivateKey(credentialsId: 'agent-key', keyFileVariable: 'agentKey', passphraseVariable: '', usernameVariable: '')]) { 
