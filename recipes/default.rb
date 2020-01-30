@@ -10,7 +10,7 @@ end
 
 file '/var/www/html/index.html' do
   action :create
-  content 'Hello World!'
+  content 'DevOps End To End!'
 end
 
 service 'apache2' do
