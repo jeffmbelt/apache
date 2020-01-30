@@ -25,7 +25,7 @@ pipeline {
     stage('Install Test Kitchen Gem') {
       steps {
         script {
-          sh 'chef exec gem list kitchen-docker | grep kitchen'
+          sh 'chef exec gem list kitchen-docker | grep "kitchen-docker"'
           sh 'if [[ $? > 0 ]]; then sudo chef gem install kitchen-docker && sudo chef env --chef-license accept; fi'
         }
       }
