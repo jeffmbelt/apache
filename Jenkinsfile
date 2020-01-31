@@ -92,6 +92,19 @@ pipeline {
         build job: 'hapolicy-pipline', parameters: []
       }
     }
+    stage('Upload to Artifactory')
+      steps {
+        rtUpload (
+          serverId: 'devops-art-server',
+          spec: '''{
+            "files": [ {
+              "pattern": "$WORKSPACE/recipes/*",
+              "target": "dev-lab/jeffb"
+            } ]
+          }''',
+        )
+      }
+    }
   }
   post {
      success {
