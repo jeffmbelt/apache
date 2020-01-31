@@ -99,7 +99,7 @@ pipeline {
           spec: '''{
             "files": [ {
               "pattern": "$WORKSPACE/recipes/*",
-              "target": "dev-lab/jeffb"
+              "target": "devops-lab/jeffb"
             } ]
           }''',
         )
