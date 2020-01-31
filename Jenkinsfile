@@ -87,6 +87,11 @@ pipeline {
         }
       }
     }
+    stage('Trigger HA Proxy Update') {
+      steps {
+        build job: 'hapolicy-pipline', parameters: []
+      }
+    }
   }
   post {
      success {
