@@ -87,11 +87,11 @@ pipeline {
         }
       }
     }
-    stage('Trigger HA Proxy Update') {
-      steps {
-        build job: 'hapolicy-pipline', parameters: []
-      }
-    }
+//    stage('Trigger HA Proxy Update') {
+//      steps {
+//        build job: 'hapolicy-pipline', parameters: []
+//      }
+//    }
     stage('Upload to Artifactory') {
       steps {
         rtUpload (
