@@ -92,7 +92,7 @@ pipeline {
         build job: 'hapolicy-pipline', parameters: []
       }
     }
-    stage('Upload to Artifactory')
+    stage('Upload to Artifactory') {
       steps {
         rtUpload (
           serverId: 'devops-art-server',
